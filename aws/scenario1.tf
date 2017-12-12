@@ -9,6 +9,7 @@ variable "aws_region" {
 
 variable "subnet_id" {
   description = "Subnet Id"
+  default = "subnet-1943137c"
 }
 
 variable "public_ssh_key_name" {
