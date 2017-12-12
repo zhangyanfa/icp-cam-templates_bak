@@ -29,7 +29,7 @@ variable "aws_amis" {
 
 
 
-resource "aws_key_pair" "cam_public_key" {
+resource "aws_key_pair" "icp_singlenode_key" {
     key_name = "${var.public_ssh_key_name}"
     public_key = "${var.public_ssh_key}"
 }
@@ -47,7 +47,7 @@ resource "aws_instance" "icp_singlenode" {
     ami = "${lookup(var.aws_amis, var.aws_region)}"
     subnet_id = "${var.subnet_id}"
     vpc_security_group_ids = ["sg-4555e839"]
-    key_name = "${aws_key_pair.cam_public_key.id}"
+    key_name = "${aws_key_pair.icp_singlenode_key.id}"
 
     associate_public_ip_address = true
 
