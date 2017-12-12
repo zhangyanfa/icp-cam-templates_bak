@@ -27,15 +27,26 @@ variable "aws_amis" {
   }
 }
 
+
+
 resource "aws_key_pair" "cam_public_key" {
     key_name = "${var.public_ssh_key_name}"
     public_key = "${var.public_ssh_key}"
+}
+
+resource "tls_private_key" "ssh" {
+  algorithm = "RSA"
+}
+resource "aws_key_pair" "temp_public_key" {
+  key_name   = "${var.public_key_name}-temp"
+  public_key = "${tls_private_key.ssh.public_key_openssh}"
 }
 
 resource "aws_instance" "icp_singlenode" {
     instance_type = "t2.xlarge"
     ami = "${lookup(var.aws_amis, var.aws_region)}"
     subnet_id = "${var.subnet_id}"
+    vpc_security_group_ids = ["sg-4555e839"]
     key_name = "${aws_key_pair.cam_public_key.id}"
 
     associate_public_ip_address = true
