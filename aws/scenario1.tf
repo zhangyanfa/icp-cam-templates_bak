@@ -41,7 +41,7 @@ resource "aws_instance" "icp_singlenode" {
     associate_public_ip_address = true
 
     root_block_device {
-        device_name = "/dev/sda1"
+        volume_type = "standard"
         volume_size = 150
     }
 }
