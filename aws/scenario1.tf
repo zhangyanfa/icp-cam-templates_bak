@@ -33,7 +33,7 @@ resource "aws_key_pair" "cam_public_key" {
 }
 
 resource "aws_instance" "icp_singlenode" {
-    instance_type = "t2.micro"
+    instance_type = "t2.xlarge"
     ami = "${lookup(var.aws_amis, var.aws_region)}"
     subnet_id = "${var.subnet_id}"
     key_name = "${aws_key_pair.cam_public_key.id}"
@@ -41,7 +41,7 @@ resource "aws_instance" "icp_singlenode" {
     associate_public_ip_address = true
 
     root_block_device {
-        device_name = "/dev/xvda1"
+        device_name = "/dev/sda1"
         volume_size = 150
     }
 }
