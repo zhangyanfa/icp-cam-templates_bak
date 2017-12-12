@@ -11,7 +11,7 @@
         "type": "string"
     }, 
     {
-        "default": "ami-f4533694", 
+        "default": "subnet-1943137c", 
         "description": "subnet id", 
         "hidden": false, 
         "immutable": false, 
