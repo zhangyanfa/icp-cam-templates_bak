@@ -32,7 +32,7 @@ resource "aws_key_pair" "cam_public_key" {
     public_key = "${var.public_ssh_key}"
 }
 
-resource "aws_instance" "cam_centos_micro" {
+resource "aws_instance" "icp_singlenode" {
     instance_type = "t2.micro"
     ami = "${lookup(var.aws_amis, var.aws_region)}"
     subnet_id = "${var.subnet_id}"
@@ -40,9 +40,8 @@ resource "aws_instance" "cam_centos_micro" {
 
     associate_public_ip_address = true
 
-    block_device {
+    root_block_device {
         device_name = "/dev/xvda1"
-        volume_type = "gp2"
         volume_size = 150
     }
 }
