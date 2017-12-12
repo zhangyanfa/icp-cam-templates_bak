@@ -1,6 +1,6 @@
 {
-    "name": "Amazon EC2 Virtual Server with SSH key",
-    "description": "Amazon EC2 Ubuntu 14.04 virtual server under an existing Virtual Private Cloud (VPC).",
+    "name": "ICP single node on Amazon EC2",
+    "description": "Amazon EC2 centos 7.3",
     "version": "1.0.0.0",
     "imageUrl": "./assets/svg/IBM_WebSphere_Standalone.svg",
     "image": "tp_WAS_standalone.png",
