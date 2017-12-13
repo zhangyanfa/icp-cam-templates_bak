@@ -22,6 +22,7 @@
         "type": "string"
     }, 
     {
+        "default": "icp-cam-key", 
         "description": "Name of the public SSH key used to connect to the virtual guest", 
         "hidden": false, 
         "immutable": false, 
@@ -30,17 +31,7 @@
         "required": true, 
         "secured": false, 
         "type": "string"
-    }, 
-    {
-        "description": "Public SSH key used to connect to the virtual guest", 
-        "hidden": false, 
-        "immutable": false, 
-        "label": "Public SSH Key", 
-        "name": "public_ssh_key", 
-        "required": true, 
-        "secured": false, 
-        "type": "string"
-    }, 
+    },  
     {
         "description": "Region-specific Amazon Ubuntu 14.04.01 images as documented at https://cloud-images.ubuntu.com/releases/14.04/14.04.1/",
         "default": {

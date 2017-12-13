@@ -14,12 +14,8 @@ variable "subnet_id" {
 
 variable "public_ssh_key_name" {
   description = "Name of the public SSH key used to connect to the virtual guest"
+  default = "icp-cam-key"
 }
-
-variable "public_ssh_key" {
-  description = "Public SSH key used to connect to the virtual guest"
-}
-
 
 variable "aws_amis" {
   default = {
@@ -32,17 +28,12 @@ variable "bootstrap_icp_ee_singlenode_file" {
     default = "bootstrap_icp_ee_singlenode.sh"
 }
 
-resource "aws_key_pair" "icp_singlenode_key" {
-    key_name = "${var.public_ssh_key_name}"
-    public_key = "${var.public_ssh_key}"
-}
-
 resource "aws_instance" "icp_singlenode" {
     instance_type = "t2.xlarge"
     ami = "${lookup(var.aws_amis, var.aws_region)}"
     subnet_id = "${var.subnet_id}"
     vpc_security_group_ids = ["sg-4555e839"]
-    key_name = "${aws_key_pair.icp_singlenode_key.id}"
+    key_name = "${var.public_ssh_key_name}"
 
     associate_public_ip_address = true
 
