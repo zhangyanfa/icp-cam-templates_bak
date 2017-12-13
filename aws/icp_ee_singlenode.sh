@@ -15,7 +15,7 @@
 #
 ################################################################
 # location of host 
-ICP_IMAGE="/home/tmp/ibm-cloud-auto-mgr-x86_64-2.1.0.tar.gz"
+ICP_IMAGE="/opt/media/ibm-cloud-auto-mgr-x86_64-2.1.0.tar.gz"
 
 # HTTP-accessible location of the IBM Cloud Private image to download
 ICP_IMAGE_HTTP_LOCATION="http://<HOSTNAME>/<PATH_TO_ICP_TAR_BALL>"

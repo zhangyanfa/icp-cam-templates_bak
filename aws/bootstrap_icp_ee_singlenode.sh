@@ -14,10 +14,36 @@
 # Copyright IBM Corp. 2017.
 #
 ################################################################
+
+/bin/echo "-----BEGIN RSA PRIVATE KEY-----" > /home/centos/icp-public-key.pem
+/bin/echo "MIIEpQIBAAKCAQEAyfGdK2luQTP9UoQOraB+C0Vcp2piClNnZ1boHl0YkSNiKYm7XP6EDY50uJoR" >> /home/centos/icp-public-key.pem
+/bin/echo "R/DkAGUBJqGnQKFzWgnOFmyh7tEP5JVoBkoxMVic5wcv7yPd7/KM/0KJLkKbz/rRebscWkwMUa39" >> /home/centos/icp-public-key.pem
+/bin/echo "ds7JIThcu9VQFxd9Fhaq97VYXntxovIJm9a8pDqaUoG5fT003t6AewRLlDeX/qkTDrZsPwMbmcBH" >> /home/centos/icp-public-key.pem
+/bin/echo "KzcvifvejljQGauVbY6o3eImyfAFQNecLrpzP8PGWtkbvLwLyLOe56839qk8EBUjLVnyCvqXzq5e" >> /home/centos/icp-public-key.pem
+/bin/echo "ktyinvFXlnvdWNhw0NbalKgVIx2RhpEGr5pFAyn9LrIcCmJO6viniwIDAQABAoIBAG5omgydFPmz" >> /home/centos/icp-public-key.pem
+/bin/echo "KgIOT1QgVillX9XsdPO+S9+VBU1sirz3gnjBY93hDWO4ChrPqTkS/CU3E90CLsZIPx/wEmvyMsq2" >> /home/centos/icp-public-key.pem
+/bin/echo "JKFOClS+BY08LHSnWk695l6E1w/MWeIf6r5YHGUYptS7lVSm8tgdEJwIC7NqWeJ2Jh6IgCr0S/9E" >> /home/centos/icp-public-key.pem
+/bin/echo "MIntGNHJKHxFE9HTW/vjixet3pIaQPQnqrlbNdLMwUVm9DdSGiCzLROklTp9ALaRmISxnmY8YPTq" >> /home/centos/icp-public-key.pem
+/bin/echo "B4WfkOjMOWPQfQjrqsuOss5zCegA+bnJA+VXuSZ3RO7+plRqI2H4LAjYZazBGy4Z4tuGmMa8wDhZ" >> /home/centos/icp-public-key.pem
+/bin/echo "02Lq1xTN6JkxBdnBDQ5wiZH2YqkCgYEA/7f7GbCnbXzxp4hWutymYCddvS+L/eX+LVXOTLZzrtsc" >> /home/centos/icp-public-key.pem
+/bin/echo "fVUyLJ3DCc4EIbk0Vlgm9Y4M85D8bSyknfRaiSV+omxSJgaC4POnHR+EZevcYY3I5Rcm98sk2npP" >> /home/centos/icp-public-key.pem
+/bin/echo "cQzhP8yhjB2gn8jCYH1oZ36f3ygUOgauVKqMto2CMfkCYPJNlb8CgYEAyip8/RtnRPRqvRddYYWy" >> /home/centos/icp-public-key.pem
+/bin/echo "mP6TdZcxYRtMRKPNMSdJEcfRYRn2TqSV86cf96K0XaBPl63SpcbPssgQB8dFidFNRckIhTu3Akb5" >> /home/centos/icp-public-key.pem
+/bin/echo "ifECZsvzx0JTbqkrBB/MTj7zOB9Am8jrHWcMzINhDustQKZw8DNjq/YZJbdKdG2unJ3IyM73GTUC" >> /home/centos/icp-public-key.pem
+/bin/echo "gYEAv6BIO8UkgiiqEkhZ7eehidaWKUozFs29/o0ZbmUfJX4uyEEKu2JxoKxQblESRk4Cy+pqDC+u" >> /home/centos/icp-public-key.pem
+/bin/echo "6cUViwRsv+9oCSExIiuo8hfEOE/A8HuiBzyvufTyj6gccthLJcVoGl4nBQ/CqVpRRutTTJMYDKtF" >> /home/centos/icp-public-key.pem
+/bin/echo "FQKiqvGvRrGeSgJ25N1OhJMCgYEAhC3NdKtTFMl9dE5vdpC0mcVw4iRNW8E+V26FfUrDQoXTxtnz" >> /home/centos/icp-public-key.pem
+/bin/echo "qa2AgULW6tENfl2PTIuQu2TGbYzStlM6iwY2sJblJD9Lw4hmJSNXv6A/rhsWc7bVcifcK5iK6zm7" >> /home/centos/icp-public-key.pem
+/bin/echo "w19VIe87dge8EMYA21E3bEUdONR50qgJXSBNVwbuvSRceLUCgYEAhCujTkV98wFzdpi3lxTjrVRM" >> /home/centos/icp-public-key.pem
+/bin/echo "Wzt/zbbxW5SdUkiKws24iUK9t6jHoWC9f9qAGpsg9T4bb3ECreZ9xrx5mBXlTl1k86DKqcEL2ZuZ" >> /home/centos/icp-public-key.pem
+/bin/echo "5t1ctHcqyf66wIbxj8YLou8rhkYGjifTW7dAQojN3Gu2cXgojaZVL3nOaVhwonz3OBDZuxE=" >> /home/centos/icp-public-key.pem
+/bin/echo "-----END RSA PRIVATE KEY-----" >> /home/centos/icp-public-key.pem
+
+/bin/chmod 400 /home/centos/icp-public-key.pem
+
 # location of host 
-ICP_IMAGE_PATH="/home/centos/ibm-cloud-auto-mgr-x86_64-2.1.0.tar.gz"
-
-
+ICP_IMAGE_NAME="ibm-cloud-auto-mgr-x86_64-2.1.0.tar.gz"
+# ICP_IMAGE_NAME="ibm-cloud-private-x86_64-2.1.0.tar.gz"
 
 # HTTP-accessible location of the IBM Cloud Private image to download
 ICP_IMAGE_HTTP_LOCATION="http://<HOSTNAME>/<PATH_TO_ICP_TAR_BALL>"
@@ -53,13 +79,15 @@ ICP_ROOT_DIR="/opt/ibm-cloud-private-ee"
 /usr/bin/systemctl start docker
 
 # Ensure the hostnames are resolvable
-IP=`/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'`
+IP=`/sbin/ifconfig eth0 | grep 'inet' | cut -d: -f2 | awk '{print $2}'`
 /bin/echo "${IP} $(hostname)" >> /etc/hosts
 
 # Download and configure IBM Cloud Private
 TMP_DIR="$(/bin/mktemp -d)"
 cd "${TMP_DIR}"
-/usr/bin/wget -q "${ICP_IMAGE_HTTP_LOCATION}"
+
+/bin/scp -i "/home/centos/icp-public-key.pem" -o StrictHostKeyChecking=no centos@172.31.20.177:/home/media/${ICP_IMAGE_NAME} ./${ICP_IMAGE_NAME}
+
 /bin/tar xf *.tar.gz -O | /usr/bin/docker load
 
 /bin/mkdir "${ICP_ROOT_DIR}-${ICP_VER}"
@@ -77,10 +105,6 @@ cd "${ICP_ROOT_DIR}-${ICP_VER}"
 /bin/echo "${IP}"    >> cluster/hosts
 /bin/echo "[worker]" >> cluster/hosts
 /bin/echo "${IP}"    >> cluster/hosts
-
-# Setup the private key for the ICP cluster (injected at deploy time)
-/bin/cp /root/id_rsa.terraform ${ICP_ROOT_DIR}-${ICP_VER}/cluster/ssh_key
-/bin/chmod 400 ${ICP_ROOT_DIR}-${ICP_VER}/cluster/ssh_key
 
 # Deploy IBM Cloud Private
 cd "${ICP_ROOT_DIR}-${ICP_VER}/cluster"

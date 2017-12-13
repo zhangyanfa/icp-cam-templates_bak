@@ -51,7 +51,5 @@ resource "aws_instance" "icp_singlenode" {
         volume_size = 150
     }
 
-    user_data = "${file("icp-public-key.pem")}"
-
     user_data = "${file("${var.bootstrap_icp_ee_singlenode_file}")}"
 }
