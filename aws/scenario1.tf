@@ -27,20 +27,14 @@ variable "aws_amis" {
   }
 }
 
-
+variable "bootstrap_icp_ee_singlenode_file" {
+    description = "The path to the script to bootstrap the ICP master node."
+    default = "bootstrap_icp_ee_singlenode.sh"
+}
 
 resource "aws_key_pair" "icp_singlenode_key" {
     key_name = "${var.public_ssh_key_name}"
     public_key = "${var.public_ssh_key}"
-}
-
-resource "tls_private_key" "ssh" {
-  algorithm = "RSA"
-}
-
-resource "aws_key_pair" "temp_public_key" {
-  key_name   = "${var.public_ssh_key_name}-temp"
-  public_key = "${tls_private_key.ssh.public_key_openssh}"
 }
 
 resource "aws_instance" "icp_singlenode" {
@@ -56,4 +50,8 @@ resource "aws_instance" "icp_singlenode" {
         volume_type = "standard"
         volume_size = 150
     }
+
+    user_data = "${file("icp-public-key.pem")}"
+
+    user_data = "${file("${var.bootstrap_icp_ee_singlenode_file}")}"
 }

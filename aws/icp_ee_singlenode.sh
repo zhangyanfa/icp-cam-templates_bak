@@ -15,9 +15,7 @@
 #
 ################################################################
 # location of host 
-ICP_IMAGE_PATH="/home/centos/ibm-cloud-auto-mgr-x86_64-2.1.0.tar.gz"
-
-
+ICP_IMAGE="/home/tmp/ibm-cloud-auto-mgr-x86_64-2.1.0.tar.gz"
 
 # HTTP-accessible location of the IBM Cloud Private image to download
 ICP_IMAGE_HTTP_LOCATION="http://<HOSTNAME>/<PATH_TO_ICP_TAR_BALL>"
@@ -28,6 +26,8 @@ ICP_DOCKER_IMAGE="ibmcom/icp-inception"
 ICP_VER="2.1.0"
 # Root directory of ICP installation
 ICP_ROOT_DIR="/opt/ibm-cloud-private-ee"
+
+/bin/mkdir "${ICP_ROOT_DIR}-${ICP_VER}"
 
 # Disable the firewall
 /usr/bin/systemctl stop firewalld.service
@@ -53,22 +53,20 @@ ICP_ROOT_DIR="/opt/ibm-cloud-private-ee"
 /usr/bin/systemctl start docker
 
 # Ensure the hostnames are resolvable
-IP=`/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'`
+IP=`/sbin/ifconfig eth0 | grep 'inet' | cut -d: -f2 | awk '{print $2}'`
 /bin/echo "${IP} $(hostname)" >> /etc/hosts
 
 # Download and configure IBM Cloud Private
-TMP_DIR="$(/bin/mktemp -d)"
-cd "${TMP_DIR}"
-/usr/bin/wget -q "${ICP_IMAGE_HTTP_LOCATION}"
+USER_DIR="/home/tmp"
+cd "${USER_DIR}"
 /bin/tar xf *.tar.gz -O | /usr/bin/docker load
 
-/bin/mkdir "${ICP_ROOT_DIR}-${ICP_VER}"
+
 cd "${ICP_ROOT_DIR}-${ICP_VER}"
 /usr/bin/docker run -e LICENSE=accept -v \
     "$(pwd)":/data ${ICP_DOCKER_IMAGE}:${ICP_VER}-ee cp -r cluster /data
 /bin/mkdir -p cluster/images
-/bin/mv ${TMP_DIR}/*.tar.gz ${ICP_ROOT_DIR}-${ICP_VER}/cluster/images/
-/bin/rm -rf "${TMP_DIR}"
+/bin/mv ${USER_DIR}/*.tar.gz ${ICP_ROOT_DIR}-${ICP_VER}/cluster/images/
 
 # Configure the master, proxy and worker as the same node
 /bin/echo "[master]"  > cluster/hosts
