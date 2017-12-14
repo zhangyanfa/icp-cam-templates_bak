@@ -41,9 +41,13 @@
 
 /bin/chmod 400 /home/centos/icp-public-key.pem
 
+/bin/sed -i 's/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config
+/bin/cp /home/centos/.ssh/authorized_keys /root/.ssh/authorized_keys
+/usr/bin/systemctl restart sshd
+
 # location of host 
-ICP_IMAGE_NAME="ibm-cloud-auto-mgr-x86_64-2.1.0.tar.gz"
-# ICP_IMAGE_NAME="ibm-cloud-private-x86_64-2.1.0.tar.gz"
+#ICP_IMAGE_NAME="ibm-cloud-auto-mgr-x86_64-2.1.0.tar.gz"
+ICP_IMAGE_NAME="ibm-cloud-private-x86_64-2.1.0.tar.gz"
 
 # HTTP-accessible location of the IBM Cloud Private image to download
 ICP_IMAGE_HTTP_LOCATION="http://<HOSTNAME>/<PATH_TO_ICP_TAR_BALL>"
@@ -84,9 +88,10 @@ IP=`/sbin/ifconfig eth0 | grep 'inet' | cut -d: -f2 | awk '{print $2}'`
 
 # Download and configure IBM Cloud Private
 TMP_DIR="$(/bin/mktemp -d)"
+
 cd "${TMP_DIR}"
 
-/bin/scp -i "/home/centos/icp-public-key.pem" -o StrictHostKeyChecking=no centos@172.31.20.177:/home/media/${ICP_IMAGE_NAME} ./${ICP_IMAGE_NAME}
+/bin/scp -i "/home/centos/icp-public-key.pem" -o StrictHostKeyChecking=no centos@172.31.20.177:/home/centos/${ICP_IMAGE_NAME} ./${ICP_IMAGE_NAME}
 
 /bin/tar xf *.tar.gz -O | /usr/bin/docker load
 
@@ -108,6 +113,37 @@ cd "${ICP_ROOT_DIR}-${ICP_VER}"
 
 # Deploy IBM Cloud Private
 cd "${ICP_ROOT_DIR}-${ICP_VER}/cluster"
+
+/bin/echo "-----BEGIN RSA PRIVATE KEY-----" > ssh_key
+/bin/echo "MIIEpAIBAAKCAQEAs27MgjFgd9aMz7TbnWn3e+4/RekgisqNoZmyl8sikqeh+IMw" >> ssh_key
+/bin/echo "9DrFFoLb14mpv6cKrz5ooYNgL/I4rZRKfYCuu8xkJy45TVI1O9DsZcub5fQ3wCdr" >> ssh_key
+/bin/echo "t3V7KFmMA1doW3+qh1+V2TKQxjHK43gUIOsJUILhA/+Vpieh+lC7sh5/84v14H3v" >> ssh_key
+/bin/echo "ItsMVNP3X9J/H7kiSs8fdy4m5habUSLEcZuQJ3uHyKH1mvmH7T5meAM7/d7edB5K" >> ssh_key
+/bin/echo "c5yVoJzIEYRa+ljXdZWb0ztz+DWMaqnG8cI3AuB1XwIVmSWdBnHhHzcotb5QXMo/" >> ssh_key
+/bin/echo "X1vUxHOyxNqVZ4CS5s2zPxl93CyRGMiPM/0OnwIDAQABAoIBAQCsZjCohriha8sv" >> ssh_key
+/bin/echo "Zh38SOw4btjsWumhcKxUMFCf99ToA5hkJejLQAxNbL29gc9PDTf+2H+/b3Ljnl9G" >> ssh_key
+/bin/echo "p8xKeXFpjyBLZOY5nFr5dessg0zuzI8kWLvuMTp7sk4Mh9cE0s0N9JENdsATLZQ6" >> ssh_key
+/bin/echo "qgzs8+anLJj2NoOaeUnwL9GnehaF8L7j2QoMZe9jojPvjcA1xADHRxymSQ26lupr" >> ssh_key
+/bin/echo "wt5P4hY7Q+zt3n9HmcssyDJlKSM94Sp+0j3JfkRPogP/ayrJTzBJumKeOsz0ehFw" >> ssh_key
+/bin/echo "k/E+tgq46YbEDF6fBvJslwrjLQ5+QxYGXMUU+P6O8G12uetUNowinqT21iXwjAZW" >> ssh_key
+/bin/echo "w/6oYxhBAoGBAOdxFwiGujL296c5JCntSjMHvMv4E1tjw9QAabXR3lv3FUmQKTm+" >> ssh_key
+/bin/echo "bnqng3hux1n+csAuPkooAb+1ais/3bbAbnCmzljzS2Q+bhWwiU2CiS61ATblfhEm" >> ssh_key
+/bin/echo "lio1drH96KZ0M605dt2n4GMWn+Zv88o36jWrwpJui6jZnjuy2HpesKktAoGBAMZ4" >> ssh_key
+/bin/echo "7pGiRoePrnzlya/UEBES9+Z8L9JsBnSxO+UDlmjsBjKRzWgWExciEdapZwqG92Lu" >> ssh_key
+/bin/echo "oAoR7CfbPCj2BEU8kxl1+clcYwW+Xnu5nfqUCxohwGmDrt+uWaWrknUdHHq6uKRV" >> ssh_key
+/bin/echo "488OjtjIJMx3FlYKVteuM4Z2vclGIkJkf0wKup57AoGAekqKVioCVw2iHE0YK8ND" >> ssh_key
+/bin/echo "UqWC/+/MIp0bi3jQYo9LRCLRr7Yp4mYaMFs1H7zBP28wqRWGOl7bVbYBLGsptvgF" >> ssh_key
+/bin/echo "Iycwn1Wm/4fxWSqX0knoPLLNunkW3O8bp5/qYPB+Lv31lFFp2oNrEFCTGwsKsU5M" >> ssh_key
+/bin/echo "RiHExOT+jLC4aGj+8+H2zN0CgYEAuf7QzEhAQoBDLCcISK+6UtXs3eHZyx+TOT5y" >> ssh_key
+/bin/echo "+97N0QwHjtKWpYmyYEZ8YygkOXhcVCl+b5F2N6+8BELxo5Tt4blu2earodFSqC4+" >> ssh_key
+/bin/echo "P3sHoHiq4fcXJeY1ew171ibu7pEXwmH/eKaS9dMysS6VDxLnaX6GKOgUWZBRQNj/" >> ssh_key
+/bin/echo "dtrDIwsCgYBXTSNG6lDauqXoYpmtwCdCVaqRT8NWu7hGx3eHjD+xxLkB9cQyz5mj" >> ssh_key
+/bin/echo "nn2iMWc2qXkCnwGQAU/oxsowqx2C6VJu9VxtgF74XDiuTSkWczjY5zVP6yHzTb9S" >> ssh_key
+/bin/echo "OGnCiO/kFKf5O73xlAsWfvbnI5FUcjutNyuGlPJiEMa3X52Q2tVEgg==" >> ssh_key
+/bin/echo "-----END RSA PRIVATE KEY-----" >> ssh_key
+
+/bin/chmod 777 ssh_key
+
 /usr/bin/docker run -e LICENSE=accept --net=host -t -v \
     "$(pwd)":/installer/cluster ${ICP_DOCKER_IMAGE}:${ICP_VER}-ee install | \
     /usr/bin/tee install.log
