@@ -32,17 +32,18 @@ variable "bootstrap_icp_ee_singlenode_file" {
     default = "bootstrap_icp_ee_singlenode.sh"
 }
 
-resource "aws_key_pair" "icp_singlenode_key" {
-    key_name = "${var.public_ssh_key_name}"
-    public_key = "${var.public_ssh_key}"
-}
+#resource "aws_key_pair" "icp_singlenode_key" {
+#    key_name = "${var.public_ssh_key_name}"
+#    public_key = "${var.public_ssh_key}"
+#}
 
 resource "aws_instance" "icp_singlenode" {
     instance_type = "t2.xlarge"
     ami = "${lookup(var.aws_amis, var.aws_region)}"
     subnet_id = "${var.subnet_id}"
     vpc_security_group_ids = ["sg-4555e839"]
-    key_name = "${aws_key_pair.icp_singlenode_key.id}"
+    #key_name = "${aws_key_pair.icp_singlenode_key.id}"
+    key_name = "${var.public_ssh_key_name}"
 
     associate_public_ip_address = true
 

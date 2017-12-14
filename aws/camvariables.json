@@ -22,6 +22,7 @@
         "type": "string"
     }, 
     {
+        "default": "icp-cam-key", 
         "description": "Name of the public SSH key used to connect to the virtual guest", 
         "hidden": false, 
         "immutable": false, 
@@ -37,7 +38,7 @@
         "immutable": false, 
         "label": "Public SSH Key", 
         "name": "public_ssh_key", 
-        "required": true, 
+        "required": false, 
         "secured": false, 
         "type": "string"
     }, 
