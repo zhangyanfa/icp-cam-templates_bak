@@ -114,6 +114,9 @@ cd "${ICP_ROOT_DIR}-${ICP_VER}"
 # Deploy IBM Cloud Private
 cd "${ICP_ROOT_DIR}-${ICP_VER}/cluster"
 
+sed -i 's/# cluster_access_ip: 0.0.0.0/cluster_access_ip: 52.24.157.233/g' config.yaml 
+sed -i 's/# proxy_access_ip: 0.0.0.0/proxy_access_ip: 52.24.157.233/g' config.yaml
+
 /bin/echo "-----BEGIN RSA PRIVATE KEY-----" > ssh_key
 /bin/echo "MIIEpAIBAAKCAQEAs27MgjFgd9aMz7TbnWn3e+4/RekgisqNoZmyl8sikqeh+IMw" >> ssh_key
 /bin/echo "9DrFFoLb14mpv6cKrz5ooYNgL/I4rZRKfYCuu8xkJy45TVI1O9DsZcub5fQ3wCdr" >> ssh_key
