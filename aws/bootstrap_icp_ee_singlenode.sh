@@ -84,7 +84,7 @@ ICP_ROOT_DIR="/opt/ibm-cloud-private-ee"
 
 # Ensure the hostnames are resolvable
 IP=`/sbin/ifconfig eth0 | grep 'inet' | cut -d: -f2 | awk '{print $2}'`
-/bin/echo "${IP} $(hostname)" >> /etc/hosts
+/bin/echo "${IP} $(hostname)" > /etc/hosts
 
 # Download and configure IBM Cloud Private
 TMP_DIR="$(/bin/mktemp -d)"
