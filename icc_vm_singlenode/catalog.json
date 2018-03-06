@@ -1,0 +1,26 @@
+{
+    "name": "ICP Singlenode",
+    "description": "Create Virtual Machine with single vnic & installation icp",
+    "type": "prebuilt",
+    "version": "1.0.4",
+    "manifest": {
+      "template_type": "Terraform",
+      "template_format": "HCL",
+      "template_provider": "VMware vSphere",
+      "template": {
+        "templateOutput": "",
+        "templateVariables": "",
+        "templateData": ""
+      },
+      "template_source": {
+        "githubRepoUrl": "",
+        "githubAccessToken": "",
+        "relativePathToTemplateFolder": "icc_vm_singlenode",
+        "templateFileName": "main.tf"
+      }
+    },
+    "metadata": {
+        "displayName": "ICP Singlenode",
+        "longDescription": "Create Virtual Machine with single vnic on a network label by cloning"
+    }
+  }
