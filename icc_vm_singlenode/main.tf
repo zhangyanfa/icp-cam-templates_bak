@@ -1,10 +1,5 @@
 ##################### Variables ###############################
 
-variable "bootstrap_icp_ee_singlenode_file" {
-    description = "The path to the script to bootstrap the ICP master node."
-    default = "icp_ee_singlenode.sh"
-}
-
 variable "name" {
 	description = "Name of the Virtual Machine"
 }
@@ -110,5 +105,5 @@ resource "vsphere_virtual_machine" "vm_1" {
     type = "thin"
   }
 
-  user_data = "${file("${var.bootstrap_icp_ee_singlenode_file}")}"
+  user_data = "${file("icp_ee_singlenode.sh")}"
 }
