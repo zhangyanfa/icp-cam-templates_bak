@@ -112,22 +112,8 @@ resource "vsphere_virtual_machine" "vm_1" {
   
   provisioner "file" {
     content = <<EOF
-#!/bin/bash
 
-################################################################
-# Module to deploy IBM Cloud Private
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Licensed Materials - Property of IBM
-#
-# Copyright IBM Corp. 2017.
-#
-################################################################
+#!/bin/bash
 
 /bin/echo "-----BEGIN RSA PRIVATE KEY-----" > /opt/icc-gpfs-key.pem
 /bin/echo "MIIEpQIBAAKCAQEAvDwX0iQ49/o3YGEOvhYtL78spVEXmFquER0w6enquTt8poJU" >> /opt/icc-gpfs-key.pem
@@ -204,38 +190,38 @@ ICP_ROOT_DIR="/opt/ibm-cloud-private"
 
 # Ensure the hostnames are resolvable
 IP=`/sbin/ifconfig -a | grep 'inet' | grep '172.20' | cut -d: -f2 | awk '{print $2}'`
-/bin/echo "${IP} $(hostname)" > /etc/hosts
+/bin/echo "$${IP} $(hostname)" > /etc/hosts
 
 # Download and configure IBM Cloud Private
 TMP_DIR="/opt"
 
-cd "${TMP_DIR}"
+cd "$${TMP_DIR}"
 
-/bin/scp -i "/opt/icc-gpfs-key.pem" -o StrictHostKeyChecking=no root@172.20.6.3:/export/vmimage/DevLib/media/${ICP_IMAGE_NAME} ./${ICP_IMAGE_NAME}
+/bin/scp -i "/opt/icc-gpfs-key.pem" -o StrictHostKeyChecking=no root@172.20.6.3:/export/vmimage/DevLib/media/$${ICP_IMAGE_NAME} ./$${ICP_IMAGE_NAME}
 
 /bin/tar xf *.tar.gz -O | /usr/bin/docker load
 
-/bin/mkdir "${ICP_ROOT_DIR}-${ICP_VER}"
-cd "${ICP_ROOT_DIR}-${ICP_VER}"
+/bin/mkdir "$${ICP_ROOT_DIR}-$${ICP_VER}"
+cd "$${ICP_ROOT_DIR}-$${ICP_VER}"
 /usr/bin/docker run -e LICENSE=accept -v \
-    "$(pwd)":/data ${ICP_DOCKER_IMAGE}:${ICP_VER}-ee cp -r cluster /data
+    "$$(pwd)":/data $${ICP_DOCKER_IMAGE}:$${ICP_VER}-ee cp -r cluster /data
 /bin/mkdir -p cluster/images
-/bin/mv ${TMP_DIR}/*.tar.gz ${ICP_ROOT_DIR}-${ICP_VER}/cluster/images/
-#/bin/rm -rf "${TMP_DIR}"
+/bin/mv $${TMP_DIR}/*.tar.gz $${ICP_ROOT_DIR}-$${ICP_VER}/cluster/images/
+#/bin/rm -rf "$${TMP_DIR}"
 
 
-/bin/echo "${IP}"    >> /etc/hosts
+/bin/echo "$${IP}"    >> /etc/hosts
 
 # Configure the master, proxy and worker as the same node
 /bin/echo "[master]"  > cluster/hosts
-/bin/echo "${IP}"    >> cluster/hosts
+/bin/echo "$${IP}"    >> cluster/hosts
 /bin/echo "[proxy]"  >> cluster/hosts
-/bin/echo "${IP}"    >> cluster/hosts
+/bin/echo "$${IP}"    >> cluster/hosts
 /bin/echo "[worker]" >> cluster/hosts
-/bin/echo "${IP}"    >> cluster/hosts
+/bin/echo "$${IP}"    >> cluster/hosts
 
 # Deploy IBM Cloud Private
-cd "${ICP_ROOT_DIR}-${ICP_VER}/cluster"
+cd "$${ICP_ROOT_DIR}-$${ICP_VER}/cluster"
 
 #sed -i 's/# cluster_access_ip: 0.0.0.0/cluster_access_ip: 52.24.157.233/g' config.yaml 
 #sed -i 's/# proxy_access_ip: 0.0.0.0/proxy_access_ip: 52.24.157.233/g' config.yaml
@@ -245,7 +231,7 @@ sed -i 's/# loopback_dns: false/loopback_dns: true/g' config.yaml
 /bin/rm -rf /var/lib/mysql
 
 /usr/bin/docker run -e LICENSE=accept --net=host -t -v \
-    "$(pwd)":/installer/cluster ${ICP_DOCKER_IMAGE}:${ICP_VER}-ee install | \
+    "$(pwd)":/installer/cluster $${ICP_DOCKER_IMAGE}:$${ICP_VER}-ee install | \
     /usr/bin/tee install.log
 
 exit 0
