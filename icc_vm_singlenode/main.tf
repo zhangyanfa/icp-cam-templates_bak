@@ -64,6 +64,14 @@ variable "allow_selfsigned_cert" {
   default     = true
 }
 
+variable "username" {
+  description = ""
+}
+
+variable "password" {
+  description = ""
+}
+
 data "vsphere_datacenter" "datacenter" {
   name = "${var.datacenter}"
 }
@@ -112,8 +120,8 @@ resource "vsphere_virtual_machine" "vm_1" {
 
   # Specify the ssh connection
   connection {
-    user     = "root"
-    password = "cbiadmin"
+    user     = "${var.username}"
+    password = "${var.password}"
     #    private_key = "${base64decode(var.camc_private_ssh_key)}"
     host = "${var.ipv4_address}"
   }
@@ -235,6 +243,10 @@ cd "$${ICP_ROOT_DIR}-$${ICP_VER}/cluster"
 #sed -i 's/# proxy_access_ip: 0.0.0.0/proxy_access_ip: 52.24.157.233/g' config.yaml
 
 sed -i 's/# loopback_dns: false/loopback_dns: true/g' config.yaml
+
+/bin/echo "ansible_user: ${var.username}"  >> config.yaml
+/bin/echo "ansible_ssh_pass: ${var.password}"  >> config.yaml
+/bin/echo "ansible_ssh_common_args: \"-oPubkeyAuthentication=no\""  >> config.yaml
 
 /bin/rm -rf /var/lib/mysql
 

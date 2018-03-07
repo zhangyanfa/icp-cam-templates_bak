@@ -130,6 +130,10 @@ cd "${ICP_ROOT_DIR}-${ICP_VER}/cluster"
 
 sed -i 's/# loopback_dns: false/loopback_dns: true/g' config.yaml
 
+/bin/echo "ansible_user: root"  >> config.yaml
+/bin/echo "ansible_ssh_pass: cbiadmin"  >> config.yaml
+/bin/echo "ansible_ssh_common_args: \"-oPubkeyAuthentication=no\""  >> config.yaml
+
 /bin/rm -rf /var/lib/mysql
 
 /usr/bin/docker run -e LICENSE=accept --net=host -t -v \

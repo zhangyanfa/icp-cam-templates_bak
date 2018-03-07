@@ -146,5 +146,27 @@
         "required": true, 
         "secured": false, 
         "type": "string"
+    },
+    {
+        "name": "username", 
+        "label": "Username", 
+        "description": "",
+        "default": "",
+        "hidden": false, 
+        "immutable": false, 
+        "required": true, 
+        "secured": false, 
+        "type": "string"
+    },
+    {
+        "name": "password", 
+        "label": "Password", 
+        "description": "",
+        "default": "",
+        "hidden": false, 
+        "immutable": false, 
+        "required": true, 
+        "secured": false, 
+        "type": "string"
     }
 ]
