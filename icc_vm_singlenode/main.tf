@@ -252,7 +252,7 @@ exit 0
   # Execute the script remotely
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/install-icp.sh; bash /tmp/install-icp.sh ",
+      "chmod +x /tmp/install-icp.sh; bash /tmp/install-icp.sh "
     ]
   }
 }
