@@ -109,6 +109,14 @@ resource "vsphere_virtual_machine" "vm_1" {
     datastore = "${var.storage}"
     template  = "${var.vm_template}"
   }
+
+  # Specify the ssh connection
+  connection {
+    user     = "root"
+    password = "cbiadmin"
+    #    private_key = "${base64decode(var.camc_private_ssh_key)}"
+    host = "${self.network_interface.0.ipv4_address}"
+  }
   
   provisioner "file" {
     content = <<EOF
