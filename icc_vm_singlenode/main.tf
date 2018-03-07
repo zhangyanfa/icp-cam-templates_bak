@@ -61,7 +61,7 @@ variable "create_vm_folder" {
 
 variable "allow_selfsigned_cert" {
   description = "Communication with vsphere server with self signed certificate"
-  default     = false
+  default     = true
 }
 
 data "vsphere_datacenter" "datacenter" {
@@ -147,8 +147,8 @@ resource "vsphere_virtual_machine" "vm_1" {
 
 /bin/sed -i 's/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config
 
+/bin/mkdir -p "/root/.ssh"
 /bin/echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8PBfSJDj3+jdgYQ6+Fi0vvyylUReYWq4RHTDp6eq5O3ymglTKBtzWhqmxd+M9ZQtKjkd71iJ06lUrYlssJBP4csVgar8F2fLGRs9+ZCv2e5b2YE2s9UvhKyg8y9hX1mO89MCAO7Ccsy56Fa1hfxK2OcFV9KOZgmLGIcv16VolFmo/wvDtF/8KetV6VH5qZWv3yL8CskTZal0rNRalczw0gi2bfCGkXpWvI0sa8VFsJ+i1hshCg3MVZs5alJ8ofhYr89HZSLCGo7eebREvdCpVzp5CkRH3v1CShJ1AllwiQ2gMLefX8E2j/wdX05NG8S73sZVwFcSU1g8yLB1rJKA7 root@Node1" >> /root/.ssh/authorized_keys
-
 /usr/bin/systemctl restart sshd
 
 # location of host 
@@ -238,13 +238,13 @@ exit 0
 
     EOF
 
-    destination = "/opt/install-icp.sh"
+    destination = "/tmp/install-icp.sh"
   }
 
   # Execute the script remotely
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /opt/install-icp.sh; bash /opt/install-icp.sh \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8PBfSJDj3+jdgYQ6+Fi0vvyylUReYWq4RHTDp6eq5O3ymglTKBtzWhqmxd+M9ZQtKjkd71iJ06lUrYlssJBP4csVgar8F2fLGRs9+ZCv2e5b2YE2s9UvhKyg8y9hX1mO89MCAO7Ccsy56Fa1hfxK2OcFV9KOZgmLGIcv16VolFmo/wvDtF/8KetV6VH5qZWv3yL8CskTZal0rNRalczw0gi2bfCGkXpWvI0sa8VFsJ+i1hshCg3MVZs5alJ8ofhYr89HZSLCGo7eebREvdCpVzp5CkRH3v1CShJ1AllwiQ2gMLefX8E2j/wdX05NG8S73sZVwFcSU1g8yLB1rJKA7 root@Node1\"",
+      "chmod +x /tmp/install-icp.sh; bash /tmp/install-icp.sh ",
     ]
   }
 }

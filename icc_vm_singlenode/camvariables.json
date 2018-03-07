@@ -140,7 +140,7 @@
         "name": "allow_selfsigned_cert", 
         "label": "Allow selfsigned certificate", 
         "description": "Communication with vsphere server with self signed certificate",
-        "default": "false",
+        "default": "true",
         "hidden": false, 
         "immutable": false, 
         "required": true, 
